@@ -1,0 +1,62 @@
+mysql.server start
+mysql -u root
+mysql.server stop
+
+    -> ;
++--------------------+
+| Tables_in_tokenjwt |
++--------------------+
+| tokens             |
+| users              |
++--------------------+
+
+create User 
+curl -v localhost:8080/users -d '{"first_name":"ashu", "last_name":"singh", "email":"ashu@gmail.com", "password":"ashu@gmail.com"}'
+
+CREATE TABLE `users_db`.`users` (
+    `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `first_name` VARCHAR(45) NULL,
+    `last_name` VARCHAR(45) NULL,
+    `email` VARCHAR(45) NULL,
+    `date_created` VARCHAR(45) NULL,
+    PRIMARY KEY(`id`));
+
+ALTER TABLE `users_db`.`users` 
+ADD COLUMN `status` VARCHAR(45) NOT NULL AFTER `email`,
+ADD COLUMN `password` VARCHAR(32) NOT NULL AFTER `status`;
+
+curl localhost:8080/users/login -d '{"email":"ashu@gmail.com", "password":"ashu@gmail.com"}'
+curl localhost:8080/ -d '{"email":"ashu@gmail.com", "password":"ashu@gmail.com"}'
+
+
+CREATE TABLE users (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(45) NOT NULL,
+    `email` VARCHAR(45) NOT NULL,
+    `passwordHash` VARCHAR(255) NOT NULL,
+    `createdAt` VARCHAR(45) NULL,
+    `updatedAt` VARCHAR(45) NULL,
+    PRIMARY KEY(`id`));
+
+CREATE TABLE tokens (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `userId` VARCHAR(45) NOT NULL,
+    `token` VARCHAR(255) NOT NULL,
+    `expires` VARCHAR(255) NOT NULL,
+    `createdAt` VARCHAR(45) NULL,
+    PRIMARY KEY(`id`));
+
+create a table of users?
+id, name, email, passwordHash, createdAt, updatedAt, 
+
+
+/users GET --> GET User by id
+/users email --> GET user by email
+/signup
+/login
+
+signup + login is working
+now token 
+
+if anyone has token, then check expiry date
+if anyone has no token, then log in them with email and password
