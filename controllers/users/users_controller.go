@@ -3,6 +3,7 @@ package users
 import (
 	"bookstore/token-jwt/domain/tokens"
 	"bookstore/token-jwt/domain/users"
+	"bookstore/token-jwt/utils"
 	"bookstore/token-jwt/utils/errors"
 	"net/http"
 	"strings"
@@ -11,7 +12,14 @@ import (
 )
 
 func CreateUser(c *gin.Context) {
+
+	utils.EnableCors(c)
+
+
 	var user users.User
+
+	// body, _ := ioutil.ReadAll(c.Request.Body)
+	// fmt.Println(string(body))
 
 	if err := c.ShouldBindJSON(&user); err != nil {
 		restErr := errors.NewBadRequestError("invalid json body")
@@ -28,7 +36,12 @@ func CreateUser(c *gin.Context) {
 
 
 func Login(c *gin.Context) {
+	utils.EnableCors(c)
+
 	var request users.User
+
+	// body, _ := ioutil.ReadAll(c.Request.Body)
+	// fmt.Println(string(body))
 
 	if err := c.BindJSON(&request); err != nil {
 		restErr := errors.NewBadRequestError("invalid json Body")
@@ -62,7 +75,7 @@ func Login(c *gin.Context) {
 		return
 	}
 	resToken.Id = 0
-	resToken.UserId = 0
+	// resToken.UserId = 0
 	c.JSON(http.StatusOK, resToken)
 
 }

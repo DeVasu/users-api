@@ -2,15 +2,23 @@ package tokens
 
 import (
 	"bookstore/token-jwt/domain/tokens"
+	"bookstore/token-jwt/utils"
 	"bookstore/token-jwt/utils/errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
+
+
+
+
+
+
+
 func GetUserByToken(c *gin.Context) {
 
-
+	utils.EnableCors(c)
 	// fmt.Println(c.Request.Header["Authorization"])
 
 	t := tokens.Token{
